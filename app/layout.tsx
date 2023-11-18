@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { ThemeProvider } from '@/providers/theme-provider'
+import { ClerkProvider } from '@clerk/nextjs'
+import Navbar from '@/components/common/navbar'
+import { Sidebar } from '@/components/common/sidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,9 +18,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const isPro = false;
   return (
+    <ClerkProvider>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar></Navbar>
+            <div className="hidden md:flex mt-16 h-full w-20 flex-col fixed inset-y-0">
+        <Sidebar isPro={isPro} />
+      </div>
+      <main className="md:pl-20 pt-16 h-full">
+        {children}
+      </main>
+        
+        </ThemeProvider>
+        </body>
     </html>
+    </ClerkProvider>
   )
 }
