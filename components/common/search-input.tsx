@@ -7,6 +7,7 @@ import { Search } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
+import { Button } from "../ui/button";
 
 export const SearchInput = () => {
   const router = useRouter();
@@ -47,6 +48,8 @@ export const SearchInput = () => {
         placeholder="Search..."
         className="pl-10 bg-primary/10"
       />
+     
+
     </div>
   )
 };
